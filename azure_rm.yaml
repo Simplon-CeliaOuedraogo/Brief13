@@ -1,4 +1,4 @@
 plugin: azure_rm
-auth_source: cli
 include_vm_resource_groups:
-- 'Brief13-Celia'
+  - Brief13-Celia
+auth_source: auto

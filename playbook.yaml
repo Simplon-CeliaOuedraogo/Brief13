@@ -1,6 +1,7 @@
 ---
 - name: Install scap-workbench
-  hosts: vm
+  #hosts: vm
+  hosts: vm-celia-B13
   become: true  # To run tasks with sudo
   remote_user: celia
   tasks:
@@ -11,14 +12,16 @@
         state: present
 
 - name: Durcissement système minimal
-  hosts: vm
+  hosts: vm-celia-B13
+  #hosts: vm
   become: true  # pour exécuter en tant que superutilisateur
   gather_facts: true
   roles:
     - role: "ANSSI-RECOM"
 
 - name: Run evaluation
-  hosts: vm
+  hosts: vm-celia-B13
+  #hosts: vm
   become: true  # To run tasks with sudo
   remote_user: celia
   tasks:
@@ -28,7 +31,8 @@
       ignore_errors: true
 
 - name: Copy result file from VM to local machine
-  hosts: vm
+  hosts: vm-celia-B13
+  #hosts: vm
   remote_user: celia
   tasks:
     - name: Copy result file using SCP
