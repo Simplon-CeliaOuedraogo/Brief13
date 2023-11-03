@@ -3,9 +3,13 @@
 ## Préparation du travail
 
 Installation d'Ansible
-``pip install ansible``
+```code
+pip install ansible
+```
 Création du rôle qui va effectuer les tâches et de la structure des fichiers (dans un repository séparé)
-``ansible-galaxy role init ANSSI-RECOM``
+```code
+ansible-galaxy role init ANSSI-RECOM
+```
 
 ## main.yaml
 Créer fichier de task dans tasks/main.yaml
