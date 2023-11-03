@@ -1,0 +1,39 @@
+---
+- name: Install scap-workbench
+  hosts: vm
+  become: true  # To run tasks with sudo
+  remote_user: celia
+  tasks:
+    - name: Install scap-workbench
+      yum:
+        name:  
+          - scap-workbench
+        state: present
+
+- name: Durcissement système minimal
+  hosts: vm
+  become: true  # pour exécuter en tant que superutilisateur
+  gather_facts: true
+  roles:
+    - role: "ANSSI-RECOM"
+
+- name: Run evaluation
+  hosts: vm
+  become: true  # To run tasks with sudo
+  remote_user: celia
+  tasks:
+    - name: Run OSCAP evaluation
+      ansible.builtin.command:
+        cmd: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --results scap_results.xml --report scap_report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+      ignore_errors: true
+
+- name: Copy result file from VM to local machine
+  hosts: vm
+  remote_user: celia
+  tasks:
+    - name: Copy result file using SCP
+      ansible.builtin.fetch:
+        src: /home/celia/scap_report.html
+        dest: /mnt/c/Users/utilisateur/Documents/Brief13/scap_report.html
+        flat: yes
+      ignore_errors: true

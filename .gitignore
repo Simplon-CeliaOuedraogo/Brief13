@@ -1,0 +1,4 @@
+VM/terraform.tfstate
+VM/terraform.tfstate.backup
+VM/.terraform.lock.hcl
+VM/.terraform/

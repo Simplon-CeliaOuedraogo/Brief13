@@ -1,0 +1,4 @@
+---
+#tasks file for ANSSI-RECOM
+- include: all.yaml
+#- include: sudo.yml
